@@ -1,0 +1,5 @@
+user_conns = "user:{}:conns"
+user_subs = "user:{}:subs"
+conns = "conns:{}"
+presence = "presence:{}"
+chann_members = "chann:{}:members"

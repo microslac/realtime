@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "realtime"
+version = "0.1.0"
+description = ""
+authors = ["tanlda <ledinhanhtan.stack@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 120
+
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__"]
+reportMissingImports = true
+reportMissingTypeStubs = false
+reportGeneralTypeIssues = false
+reportOptionalSubscript = false
+reportPrivateImportUsage = "information"
+reportUnusedFunction = true
+
+pythonPlatform = "Linux"
+pythonVersion = "3.11"
+
+[tool.isort]
+known_local_folder = ["webmaster_verification", "sk*"]
+known_typing_extensions = "typing_extensions"
+line_length = 120
+no_lines_before = "TYPING_EXTENSIONS"
+profile = "black"
+sections = [
+    "FUTURE",
+    "STDLIB",
+    "TYPING_EXTENSIONS",
+    "THIRDPARTY",
+    "LOCALFOLDER",
+    "FIRSTPARTY",
+]
