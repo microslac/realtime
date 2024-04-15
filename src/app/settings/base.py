@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-environment = os.environ.get("APP_ENVIRONMENT", "")
+environment = os.environ.get("ENVIRONMENT", "")
 
 env_file = ROOT_DIR / ".env"
 

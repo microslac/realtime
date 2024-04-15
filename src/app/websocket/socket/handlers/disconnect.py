@@ -4,12 +4,13 @@ from app.websocket.socket import Handler, keys
 
 class DisconnectHandler(Handler):
     async def handle(self) -> dict:
-        user_id = await self.store.get(keys.conns.format(self.ctx.connection_id))
+        connection_id = self.ctx.connection_id
+        user_id = await self.store.get(keys.conns.format(connection_id))
         if user_id:
             await presence.heartbeat(user_id, active=False)
             await self.clear_subscriptions(user_id)
-            await self.store.delete(keys.user_conns.format(user_id))
-            await self.store.delete(keys.conns.format(self.ctx.connection_id))
+            await self.store.delete(keys.conns.format(connection_id))
+            await self.store.remove(keys.user_conns.format(user_id), [connection_id])
             # TODO: resend presence_sub again before keys.user_subs expire (6 hours)
         return {}
 
