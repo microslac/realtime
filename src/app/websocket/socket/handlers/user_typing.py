@@ -19,12 +19,12 @@ class UserTypingHandler(Handler):
         return {}
 
     async def get_member_ids(self, channel_id: str, exclude_id: str = "") -> list[str]:
-        key = keys.chann_members.format(channel_id)
+        key = keys.channel_members.format(channel_id)
         member_ids = await self.store.all(key)
         if not member_ids:
             member_ids: list[str] = ConversationsService.post(
                 "/internal/members", data=dict(channel=channel_id, all_members=True), internal=True, key="members"
             )
             await self.store.add_all(key, member_ids)
-        member_ids.remove(exclude_id)
+        member_ids = [i for i in member_ids if i != exclude_id]
         return member_ids

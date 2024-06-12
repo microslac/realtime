@@ -29,5 +29,5 @@ async def user_profile_handler(payload: Annotated[dict, Body()], ctx: Annotated[
 
 @router.subscriber(channel_member_queue, exchange)
 async def channel_member_handler(payload: Annotated[dict, Body()], ctx: Annotated[QueueContext, Depends()]):
-    await websocket.store.delete(keys.chann_members.format(payload.get("channel")))
+    await websocket.store.delete(keys.channel_members.format(payload.get("channel")))
     await websocket.consume(SocketType.CHANNEL_MEMBER_JOINED, payload=payload, ctx=ctx)
